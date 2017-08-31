@@ -1,6 +1,6 @@
 #!py
 
-from .event import EVENT
+from ..event import EVENT
 
 def _ACTION(D):
     action = {}
