@@ -1,18 +1,22 @@
 #!py
 
-def _ACTION(P,C):
+def _ACTION(D):
     action = {}
+
+    PKGS = D['pkgs']
+    PATH = D['path']
+    CONF = D['conf']
 
     action['install_collectd'] = {
         'pkg.installed': [
-            {'name': 'collectd'}
+            {'pkgs': PKGS}
         ]
     }
 
     action['config_collectd'] = {
         'file.managed': [
-            {'name': P + 'salt.conf'},
-            {'contents': C},
+            {'name': PATH + 'salted.conf'},
+            {'contents': CONF},
             {'user': 'root'},
             {'group': 'root'},
             {'mode': 644},
@@ -27,7 +31,7 @@ def _ACTION(P,C):
             {'name': 'collectd'},
             {'enable': True},
             {'watch': [
-            {'file': 'config_collectd'}
+                {'file': 'config_collectd'}
             ]}
         ]
     }
@@ -35,15 +39,14 @@ def _ACTION(P,C):
     return action
 
 def run():
-    if 'collectd' in __pillar__:
-        config = __pillar__['collectd']['config']
-
-        if __grains__['os'] == 'CentOS':
-            path = "/etc/collectd.d/"
-        elif __grains__['os'] == 'Ubuntu':
-            path = "/etc/collectd/collectd.conf.d/"
-
-        return _ACTION(path, config)
-    else:
+    if 'collectd' not in __pillar__:
         message = "collectd missing in pillar data"
         return _EVENT(M)
+
+    elif __pillar__['collectd']['path'] is None:
+        message = "collectd missing path, what OS is this?"
+        return _EVENT(M)
+
+    else:
+        DATA = __pillar__['collectd']
+        return _ACTION(DATA)
