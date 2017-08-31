@@ -43,11 +43,11 @@ def _ACTION(D):
 def run():
     if 'collectd' not in __pillar__:
         message = "collectd missing in pillar data"
-        return event.EVENT(M)
+        return EVENT(M)
 
     elif __pillar__['collectd']['path'] is None:
         message = "collectd missing path, what OS is this?"
-        return event.EVENT(M)
+        return EVENT(M)
 
     else:
         DATA = __pillar__['collectd']
