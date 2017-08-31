@@ -1,6 +1,6 @@
 #!py
 
-from /srv/salt/event import EVENT
+from .. import event
 
 def _ACTION(D):
     action = {}
