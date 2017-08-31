@@ -1,6 +1,6 @@
 #!py
 
-from .. import event
+import salt.states.event
 
 def _ACTION(D):
     action = {}
