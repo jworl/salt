@@ -1,6 +1,6 @@
 #!py
 
-from ..event import EVENT
+from .. import event
 
 def _ACTION(D):
     action = {}
@@ -43,11 +43,11 @@ def _ACTION(D):
 def run():
     if 'collectd' not in __pillar__:
         message = "collectd missing in pillar data"
-        return _EVENT(M)
+        return event.EVENT(M)
 
     elif __pillar__['collectd']['path'] is None:
         message = "collectd missing path, what OS is this?"
-        return _EVENT(M)
+        return event.EVENT(M)
 
     else:
         DATA = __pillar__['collectd']
