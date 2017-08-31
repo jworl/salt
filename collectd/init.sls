@@ -1,6 +1,6 @@
 #!py
 
-import ../event.py as event
+import ../event as event
 
 def _ACTION(D):
     action = {}
