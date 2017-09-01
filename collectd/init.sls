@@ -1,7 +1,7 @@
 #!py
 
 import salt.states.event
-import imp
+from imp import load_source
 # import salt.states.file_contents
 
 def _ACTION(D):
@@ -16,7 +16,7 @@ def _ACTION(D):
     #         {'pkgs': PKGS}
     #     ]
     # }
-    install = imp.load_source('PKGS_INSTALL', '/srv/salt/pkgs_install.py')
+    install = load_source('PKGS_INSTALL', '/srv/salt/pkgs_install.py')
     action['install_collectd'] = install.PKGS_INSTALL(PKGS)
 
     action['config_collectd'] = {
