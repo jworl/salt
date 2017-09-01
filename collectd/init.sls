@@ -1,7 +1,7 @@
 #!py
 
 import salt.states.event
-import pkgs_install
+from .. import pkgs_install
 import salt.states.file_contents
 
 def _ACTION(D):
