@@ -1,6 +1,8 @@
 #!py
 
 import salt.states.event
+import salt.states.pkgs_install
+import salt.states.file_contents
 
 def _ACTION(D):
     action = {}
@@ -9,11 +11,13 @@ def _ACTION(D):
     PATH = D['path']
     CONF = D['conf']
 
-    action['install_collectd'] = {
-        'pkg.installed': [
-            {'pkgs': PKGS}
-        ]
-    }
+    # action['install_collectd'] = {
+    #     'pkg.installed': [
+    #         {'pkgs': PKGS}
+    #     ]
+    # }
+
+    action['install_collectd'] = PKGS_INSTALL(PKGS)
 
     action['config_collectd'] = {
         'file.managed': [
