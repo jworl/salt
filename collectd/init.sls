@@ -39,7 +39,7 @@ def _ACTION(D):
         "root",
         644,
         requisite={'require': [
-            {'pkgs': 'install_collectd'}
+            {'pkg': 'install_collectd'}
         ]}
     )
 
